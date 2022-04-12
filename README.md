@@ -12,8 +12,6 @@ pnpm init
 
 ## Swish's epic super happy fun todo list:
 
----
-
 General Functionality:
 - [x] Custom CSS and SCSS snippets
 - [x] Custom JS, TS, and JSX snippets
