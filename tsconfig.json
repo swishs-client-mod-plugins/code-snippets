@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "module": "es2022",
+    "target": "es2022",
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@modules/*": [
+        "src/renderer/modules/*"
+      ],
+      "@components/*": [
+        "src/renderer/components/*"
+      ],
+      "@discord-types/*": [
+        "discord-types/*"
+      ]
+    },
+  }
+}

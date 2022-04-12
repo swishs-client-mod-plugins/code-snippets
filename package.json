@@ -1,0 +1,24 @@
+{
+	"version": "0.0.1",
+	"scripts": {
+		"init": "pnpm install --production",
+		"build": "webpack --progress --env=minify=true"
+	},
+	"devDependencies": {
+		"@swc/core": "^1.2.140",
+		"@types/lodash": "^4.14.180",
+		"@types/react": "^17.0.39",
+		"clean-webpack-plugin": "^4.0.0",
+		"css-loader": "^6.6.0",
+		"mini-css-extract-plugin": "^2.6.0",
+		"monaco-editor": "^0.32.1",
+		"sass-loader": "^12.6.0",
+		"swc-loader": "^0.1.15",
+		"webpack": "^5.69.0",
+		"webpack-cli": "^4.9.2"
+	},
+	"dependencies": {
+		"sass": "^1.49.7",
+		"sucrase": "^3.20.3"
+	}
+}

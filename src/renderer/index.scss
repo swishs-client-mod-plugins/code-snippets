@@ -1,0 +1,229 @@
+$background: var(--background-secondary-alt);
+$expanded-width: 510px;
+$collapsed-width: 632px;
+$expanded-sidebar: 175px;
+$collapsed-sidebar: 53px;
+
+.code-snippets {
+  &-editor {
+    &-container {
+      border-radius: 1rem;
+      height: calc(95vh - 150px);
+    }
+
+    &-collapsed {
+      width: $collapsed-width;
+    }
+
+    &-expanded {
+      width: $expanded-width;
+    }
+  }
+
+  &-sidebar {
+    &-container {
+      padding: 10px;
+      height: calc(95vh - 110px);
+      background-color: $background;
+    }
+
+    &-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > h3 {
+        margin-bottom: 0;
+      }
+    }
+
+    &-divider {
+      margin: 5px 0 10px;
+      border-bottom: 1px solid;
+      border-color: var(--background-modifier-accent);
+    }
+
+    &-collapsed {
+      width: $collapsed-sidebar;
+    }
+
+    &-expanded {
+      width: $expanded-sidebar;
+    }
+
+    &-collapsed > &-topbar,
+    &-collapsed > &-tab-list > div {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-tab {
+      &-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        > div {
+          display: block !important;
+          height: calc(95vh - 160px);
+        }
+      }
+
+      &-item {
+        padding: 6px;
+        display: flex;
+        flex-shrink: 0;
+        cursor: pointer;
+        font-weight: 500;
+        margin-bottom: 2px;
+        border-radius: 4px;
+        position: relative;
+        align-items: center;
+        color: var(--interactive-normal);
+
+        &:not(&-selected):hover {
+          background-color: var(--background-modifier-hover);
+        }
+
+        &-text {
+          margin-left: 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        &-drag {
+          &-above::after,
+          &-below::before {
+            left: 0;
+            right: 0;
+            z-index: 1;
+            content: '';
+            height: 4px;
+            position: absolute;
+            border-radius: 2px;
+            box-shadow: 0 0 3px rgb(0 0 0 / 40%);
+            background-color: hsl(139, calc(var(--saturation-factor, 1)*47.3%), 43.9%);
+          }
+
+          &-below::before {
+            top: -2px;
+          }
+
+          &-above::after {
+            bottom: -2px;
+          }
+        }
+
+        &-selected {
+          background-color: var(--background-modifier-selected);
+        }
+
+        &-selected &-text {
+          color: var(--interactive-active);
+        }
+
+        > svg {
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+
+  &-container {
+    display: flex;
+  }
+
+  &-popped {
+    // Flexbox was being a bitch and I'm lazy.
+    transform: translate(0, 25vh);
+    text-align: center;
+
+    &-header {
+      margin: 8px;
+      font-weight: 700;
+    }
+
+    &-image {
+      max-width: 512px;
+    }
+  }
+
+  &-modal {
+    &-delete {
+      &-content {
+        text-align: center;
+        padding-left: 16px;
+      }
+
+      &-closebutton {
+        top: 12px;
+        right: 4px;
+        position: absolute;
+      }
+
+      &-title {
+        font-weight: 700;
+        margin-top: 40px;
+      }
+
+      &-subtitle {
+        margin-top: 8px;
+        margin-bottom: 32px;
+      }
+
+      &-button {
+        width: 100%;
+      }
+    }
+  }
+
+  &-topbar {
+    &-container {
+      height: 40px;
+      display: flex;
+      padding-right: 5px;
+      align-items: center;
+      background-color: $background;
+
+      > h3 {
+        display: flex;
+        margin-bottom: 0;
+        align-items: center;
+      }
+    }
+
+    &-collapsed {
+      width: $collapsed-width;
+    }
+
+    &-expanded {
+      width: $expanded-width;
+    }
+
+    &-switch {
+      margin-right: 6px;
+      padding-right: 3px;
+      border-right: var(--background-modifier-accent) thin solid;
+
+      > div {
+        width: 35px;
+        height: 20px;
+
+        > svg {
+          height: 14px;
+        }
+      }
+    }
+
+    &-rocket:hover {
+      cursor: pointer !important;
+      background-color: var(--background-primary) !important;
+    }
+
+    &-jstitle:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
