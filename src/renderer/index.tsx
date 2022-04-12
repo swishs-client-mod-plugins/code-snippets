@@ -8,6 +8,8 @@ import Webpack from '@modules/Webpack';
 import * as monaco from 'monaco-editor';
 
 const registerSettingsView = async () => {
+  // Redundent because I believe the if the dependencies in index.json don't exist the package just wont load.
+  // But just in case :)
   if (!window.kernel.packages.getPackages()['kernel-settings'])
     return Logger.warn(`You do not have KernelSettings installed! (https://github.com/strencher-kernel/settings)`);
 
@@ -32,13 +34,13 @@ const injectCSS = (Manager: typeof import('@modules/Manager').default) => {
   if (!style) return Logger.warn('Could not find styles file.');
 
   // Internal Styles
-  const uninjectInternal = Manager.injectCSS(style, 'internal');
+  const internalStyles = Manager.injectCSS(style, 'internal');
 
   const fontsPath = CodeSnippetsNative.readDir('dist').find(file => file.endsWith('.ttf'));
   const fontsFile = CodeSnippetsNative.readFile(`dist/${fontsPath}`, true);
 
   // Codicon (Monaco) Font
-  const uninjectCodicon = Manager.injectCSS(`
+  const codiconStyles = Manager.injectCSS(`
     @font-face {
       font-family: 'codicon';
       src: url('data:font/truetype;charset=utf-8;base64,${fontsFile}') format('truetype');
@@ -46,8 +48,8 @@ const injectCSS = (Manager: typeof import('@modules/Manager').default) => {
   `, 'codicon');
 
   return () => {
-    uninjectInternal.remove();
-    uninjectCodicon.remove();
+    codiconStyles.remove();
+    internalStyles.remove();
   };
 };
 
@@ -85,8 +87,7 @@ export default {
     // Wait for webpack to load.
     await Webpack.whenReady;
 
-    // Manager uses Webpack Search so we have
-    // to load it after webpack search is ready.
+    // Manager uses Webpack Search so we have to load it after webpack search is ready.
     const Manager = (await import('@modules/Manager')).default;
 
     // Makes it so you don't have to reduntently import React to every file.

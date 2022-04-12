@@ -139,9 +139,7 @@ const renameSnippet = (name: string, newName: string) => {
 
   try {
     let index = Object.keys(snippets).indexOf(name);
-    let array = Object.keys(snippets).map((snippet) => {
-      return [snippet, snippets[snippet]];
-    });
+    let array = Object.entries(snippets);
 
     array.splice(index, 1, [newName, snippets[name]]);
 
@@ -160,9 +158,7 @@ const moveSnippet = (name: string, index: number) => {
   try {
     let value = snippets[name];
 
-    let array = Object.keys(snippets).map((snippet) => {
-      if (snippet !== name) return [snippet, snippets[snippet]];
-    }).filter(Boolean);
+    let array = Object.entries(snippets).filter(([key]) => key !== name);
 
     array.splice(index, 0, [name, value]);
 
