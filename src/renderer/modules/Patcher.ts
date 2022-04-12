@@ -1,6 +1,6 @@
 /* The below source code is licensed under MIT. */
 
-import Logger from './logger';
+import Logger from './Logger';
 
 enum PatcherTypes { AFTER, BEFORE, INSTEAD }
 type PatcherVars = [object, string, Function];
