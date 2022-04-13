@@ -12,9 +12,6 @@
       ],
       "@components/*": [
         "src/renderer/components/*"
-      ],
-      "@discord-types/*": [
-        "discord-types/*"
       ]
     },
   }

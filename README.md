@@ -1,6 +1,8 @@
 # Code Snippets
 A [Kernel](https://github.com/kernel-mod/electron) package (specifically for Discord) that adds a tab in settings where you can add and manage code snippets.
 
+**Requires:** https://github.com/strencher-kernel/settings
+
 ### Note:
 This is an *ALPHA* package, expect bugs; but also please mention me when you find them :)
 
@@ -19,7 +21,6 @@ General Functionality:
 
 Bug Fixes:
 - [ ] Whitelist domains (if needed) as I've only tested this with CSP forcebly removed.
-- [ ] In JS (not TS for some reason?) "this" should be `globalThis` but it's not; it's some random shit.
 
 
 QOL Features:

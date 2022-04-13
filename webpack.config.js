@@ -71,7 +71,6 @@ module.exports = ({ minify = false }) => {
         '.scss',
       ],
       alias: {
-        '@discord-types': path.resolve(__dirname, './discord-types'),
         '@modules': path.resolve(__dirname, './src/renderer/modules'),
         '@components': path.resolve(__dirname, './src/renderer/components'),
       }
