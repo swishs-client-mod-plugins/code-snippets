@@ -23,4 +23,17 @@ declare interface Snippet {
   code: string;
   enabled: boolean;
   extension: string;
+  gist?: {
+    id: string;
+    name?: string;
+  };
+}
+
+declare interface States {
+  editorRef: React.MutableRefObject<any>;
+  forceUpdate: React.DispatchWithoutAction;
+  remountMonaco: React.DispatchWithoutAction;
+  collapsedState: [boolean, React.DispatchWithoutAction];
+  unsavedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  currentSnippet: [string, React.Dispatch<React.SetStateAction<string>>, string];
 }

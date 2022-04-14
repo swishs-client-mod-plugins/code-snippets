@@ -33,16 +33,6 @@ const {
   BarlessScroller,
 } = Webpack.components;
 
-interface SideBarProps {
-  states: {
-    editorRef: React.MutableRefObject<any>;
-    forceUpdate: React.DispatchWithoutAction;
-    collapsedState: [boolean, React.DispatchWithoutAction];
-    unsavedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-    currentSnippet: [string, React.Dispatch<React.SetStateAction<string>>, string];
-  };
-}
-
 interface TabItemProps {
   index: number;
   snippet: string;
@@ -59,7 +49,7 @@ interface TabItemContextMenuProps {
   state: [string, React.Dispatch<React.SetStateAction<string>>, string];
 }
 
-export default ({ states }: SideBarProps): JSX.Element => {
+export default ({ states }: { states: States; }): JSX.Element => {
   const { LEFT, RIGHT } = Icon.Caret.Directions;
   const { button } = ButtonColors;
 

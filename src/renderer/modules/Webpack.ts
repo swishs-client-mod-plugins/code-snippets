@@ -325,6 +325,8 @@ whenReady.then(() => {
   const [
     Pin,
     Plus,
+    Link,
+    Pull,
     Caret,
     Trash,
     Popout,
@@ -332,6 +334,8 @@ whenReady.then(() => {
   ] = bulk(
     Filters.byDisplayName('Pin'),
     Filters.byDisplayName('Plus'),
+    Filters.byDisplayName('Link'),
+    Filters.byDisplayName('Download'),
     Filters.byDisplayName('Caret'),
     Filters.byDisplayName('Trash'),
     Filters.byDisplayName('Launch'),
@@ -359,6 +363,8 @@ whenReady.then(() => {
     Icon: {
       Pin,
       Plus,
+      Link,
+      Pull,
       Caret,
       Trash,
       Popout,

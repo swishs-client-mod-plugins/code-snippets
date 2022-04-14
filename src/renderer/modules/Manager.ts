@@ -77,7 +77,6 @@ const getScriptType = (name: string): ScriptType => {
     return ScriptType.CSS;
   else if (snippet.extension in extensions)
     return ScriptType.JS;
-  return;
 };
 
 const getSnippets = (): Snippets => {
@@ -255,6 +254,16 @@ const runSnippet = async (name: string, type: ScriptType, silent?: boolean) => {
   update?.();
 };
 
+const pullGist = async (gist: Snippet['gist']): Promise<string> => {
+  const data = await (await fetch(`https://api.github.com/gists/${gist.id}`)).json();
+  if (data.message) return Promise.reject('Gist does not exist!');
+
+  const code = data.files[gist.name]?.content ?? data.files[Object.keys(data.files)[0]]?.content;
+  if (!code) return Promise.reject('Gist does not contain any files!');
+
+  return code;
+};
+
 export default {
   makeToast,
   cleanup,
@@ -275,6 +284,7 @@ export default {
   runCode,
   injectCSS,
   runSnippet,
+  pullGist,
 
   ScriptType,
   get cleanups() {

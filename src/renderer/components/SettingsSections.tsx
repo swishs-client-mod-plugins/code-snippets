@@ -27,6 +27,9 @@ export default () => {
   const forceUpdate = React.useReducer(() => ({}), {})[1];
   const currentSnippetState = React.useState(Manager.getFirstSnippet());
 
+  // This is a hack, changing the key of a React component remounts it.
+  const [remountKey, remountMonaco] = React.useReducer(v => !v, false);
+
   // Shove it a ref so it's saved across rerenders.
   // Render has a failsafe so if the key isn't in snippets it will still render
   const lastSnippet = React.useRef('no snippets? :nobitches:');
@@ -45,7 +48,14 @@ export default () => {
   type CurrentSnippetState = [string, React.Dispatch<React.SetStateAction<string>>, string];
   const currentSnippet: CurrentSnippetState = [currentSnippetState[0], setCurrentSnippet, lastSnippet.current];
 
-  const states = { currentSnippet, forceUpdate, collapsedState, unsavedState, editorRef };
+  const states = {
+    editorRef,
+    forceUpdate,
+    unsavedState,
+    remountMonaco,
+    currentSnippet,
+    collapsedState,
+  };
 
   // Set manager to update this component on file change.
   Manager.setUpdate(forceUpdate);
@@ -59,7 +69,7 @@ export default () => {
         <SideBar states={states} />
         <div className={pjoin(['editor', 'container'])}>
           <TopBar states={states} />
-          <Editor states={states} />
+          <Editor states={states} key={Number(remountKey)} />
         </div>
       </div>
     </FormSection>

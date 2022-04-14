@@ -11,7 +11,7 @@ interface InputModalProps {
     buttonText?: string;
     placeholder?: string,
     initialInput?: string,
-    rejectFilter?: (input: string) => string | undefined;
+    rejectFilter?: (input: string) => string | void;
   };
 }
 

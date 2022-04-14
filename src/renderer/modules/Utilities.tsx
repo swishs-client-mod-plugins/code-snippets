@@ -25,7 +25,7 @@ export function cjoin(prefix: string) {
 }
 
 export function sleep(ms: number) {
-  new Promise(res => setTimeout(res, ms));
+  return new Promise(res => setTimeout(res, ms));
 }
 
 export function callArgs(functions: Function[], callMethod?: string): any {

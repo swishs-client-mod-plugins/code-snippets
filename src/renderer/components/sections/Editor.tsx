@@ -20,12 +20,10 @@ const createEditorTheme = () => {
 
   const colors = {
     textColor: getValue('--text-normal'),
+    bgAccent: getValue('--background-accent'),
     bgFloating: getValue('--background-floating'),
     bgTeritary: getValue('--background-tertiary'),
-    bgAccent: getValue('--background-accent'),
   };
-
-  console.log(colors);
 
   const lightMode = SettingsStore.settings.appearance.theme - 1;
   monaco.editor.defineTheme('code-snippets', {
@@ -36,13 +34,11 @@ const createEditorTheme = () => {
       { background: colors.bgTeritary }
     ],
     colors: {
+      /* THIS IS NOT EVEN CLOSE TO FULLY THEMED */
+      /* If someone wants to help me theme this please do so! */
       'editor.background': colors.bgTeritary,
-      // 'editorWidget.foreground': colors.bgAccent,
       'editorGutter.background': colors.bgTeritary,
-      // 'editorWidget.background': colors.bgFloating,
       'editorLineNumber.foreground': colors.textColor,
-      // 'editorSuggestWidget.background': colors.bgFloating,
-      // 'editorSuggestWidget.selectedBackground': colors.bgAccent,
     }
   });
 };
@@ -63,16 +59,7 @@ const parseLanguage = (extension: string) => {
   }
 };
 
-interface EditorProps {
-  states: {
-    editorRef: React.MutableRefObject<any>;
-    collapsedState: [boolean, React.DispatchWithoutAction];
-    unsavedState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-    currentSnippet: [string, React.Dispatch<React.SetStateAction<string>>, string];
-  };
-}
-
-export default ({ states }: EditorProps) => {
+export default ({ states }: { states: States; }) => {
   const { editorRef } = states;
 
   const bindings = React.useRef([]);
