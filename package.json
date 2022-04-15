@@ -1,5 +1,5 @@
 {
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"scripts": {
 		"init": "pnpm install --production",
 		"build": "webpack --progress --env=minify=true"

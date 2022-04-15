@@ -11,8 +11,33 @@ const join = cjoin('editor');
 
 const SettingsStore = Webpack.getByProps('getFullState', 'settings');
 
+// https://1loc.dev/misc/convert-3-digits-color-to-6-digits-color/
+const toFullHexColor = (color: string): string =>
+  `#${(color.startsWith('#') ? color.slice(1) : color)
+    .split('')
+    .map((c) => `${c}${c}`)
+    .join('')}`;
+
+// https://1loc.dev/misc/convert-rgb-color-to-hex/
+const rgbToHex = (colors: number[]): string =>
+  `#${((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2])
+    .toString(16)
+    .slice(1)}`;
+
+const extractRGB = (value: string): number[] =>
+  value.match(/rgba?\(((?:[1-9]*,? ?){2}[1-9]*)/)?.[1]
+    .split(',')
+    .map(Number);
+
+const convertToHex = (value: string) =>
+  !value.indexOf('rgb')
+    ? rgbToHex(extractRGB(value))
+    : value.length === 4
+      ? toFullHexColor(value)
+      : value.substring(0, 7);
+
 const getValue = (value: string): string =>
-  body.getPropertyValue(value);
+  convertToHex(body.getPropertyValue(value).trim());
 
 let body: CSSStyleDeclaration;
 const createEditorTheme = () => {

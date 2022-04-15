@@ -18,6 +18,7 @@ General Functionality:
 - [x] Custom CSS and SCSS snippets
 - [x] Custom JS, TS, and JSX snippets
 - [ ] SASS syntax support
+- [ ] Help Modal (with backup snippets button)
 
 Bug Fixes:
 - [ ] Whitelist domains (if needed) as I've only tested this with CSP forcebly removed.
