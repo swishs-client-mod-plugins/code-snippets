@@ -78,12 +78,14 @@ declare const Webpack: {
   readonly ready: boolean;
   readonly components: {
     Icon: {
-      Pin: any;
-      Plus: any;
-      Caret: any;
-      Trash: any;
-      Popout: any;
-      Rocket: any;
+      Pin: any,
+      Plus: any,
+      Link: any,
+      Pull: any,
+      Caret: any,
+      Trash: any,
+      Popout: any,
+      Rocket: any,
     },
     Modal: {
       Root: any;

@@ -91,16 +91,13 @@ export default ({ states }: { states: States; }) => {
           onClick={async () => {
             const id = await new Promise(resolve => {
               ModalActions.openModal((event: ModalEvent) => {
-                return <InputModal event={event} action={(id: string) => {
-                  resolve(id);
-                }} options={{
+                return <InputModal event={event} action={resolve} options={{
                   buttonText: 'Save ID',
                   titleText: 'Github Gist ID',
                   headerText: 'Enter the ID of the gist you want to pull from',
                   placeholder: 'aec93e7d46e041e5c37f3d25bcbee20c',
                   rejectFilter: (input: string) => {
-                    if (input.includes('gist.github.com')) return 'Insert the ID not the URL!';
-                    if (!input.match(/^[0-9a-f]{32}$/)) return 'Invalid ID!';
+                    if (!/^[0-9a-f]{32}$/.test(input)) return 'Invalid ID!';
                   }
                 }} />;
               });
@@ -138,8 +135,7 @@ export default ({ states }: { states: States; }) => {
             }}
           />
         </div>}
-      {
-        Boolean(scriptType) ||
+      {Boolean(scriptType) ||
         <Tooltip position='top' text={`${!snippet.enabled ? 'Turn on' : 'Turn off'} Run on Startup`}>
           <div className={`${button} ${!snippet.enabled ? join(disabled, pjoin('rocket')) : ''}`}
             onClick={() => Manager.updateSnippet(currentSnippet, { enabled: !snippet.enabled })}>

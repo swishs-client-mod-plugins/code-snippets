@@ -25,7 +25,7 @@ Bug Fixes:
 
 QOL Features:
 - [ ] Popout support (this is a fucking nightmare because monaco)
-- [ ] Add a linking mechanism where you can link snippets to Github gist
+- [x] Add a linking mechanism where you can link snippets to Github gist
 
 Maybe?:
 - TSX support (because of the way the typescript compiler settings work in monaco it's really finicky to get this working)
