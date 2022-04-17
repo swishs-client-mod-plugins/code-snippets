@@ -1,5 +1,3 @@
-
-
 /* The below code is licensed under MIT. */
 
 import Manager from '@modules/Manager';
