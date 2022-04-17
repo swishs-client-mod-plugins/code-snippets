@@ -79,6 +79,7 @@ declare const Webpack: {
   readonly components: {
     Icon: {
       Pin: any;
+      Info: any;
       Plus: any;
       Link: any;
       Pull: any;

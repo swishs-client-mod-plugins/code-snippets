@@ -324,6 +324,7 @@ export { Filters };
 whenReady.then(() => {
   const [
     Pin,
+    Info,
     Plus,
     Link,
     Pull,
@@ -333,6 +334,7 @@ whenReady.then(() => {
     Rocket,
   ] = bulk(
     Filters.byDisplayName('Pin'),
+    Filters.byDisplayName('Info'),
     Filters.byDisplayName('Plus'),
     Filters.byDisplayName('Link'),
     Filters.byDisplayName('Download'),
@@ -362,6 +364,7 @@ whenReady.then(() => {
   components = {
     Icon: {
       Pin,
+      Info,
       Plus,
       Link,
       Pull,

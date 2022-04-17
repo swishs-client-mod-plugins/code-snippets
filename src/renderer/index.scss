@@ -151,7 +151,51 @@ $collapsed-sidebar: 53px;
     }
   }
 
+  &-header {
+    &-title {
+      margin-bottom: 20px;
+      display: inline-flex;
+    }
+
+    &-icon {
+      padding: 4px;
+      display: inline;
+      cursor: pointer;
+      margin-left: 2px;
+      color: var(--interactive-normal);
+
+      svg:active {
+        padding-top: 1px;
+        color: var(--interactive-active);
+        background-color: var(--background-modifier-active);
+      }
+
+      &-tooltip {
+        display: inline;
+      }
+    }
+  }
+
   &-modal {
+    &-information {
+      &-pad-title {
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+
+      &-codeblock {
+        > pre {
+          user-select: text;
+          line-height: 1.125rem;
+          white-space: pre-wrap;
+          background-color: var(--background-tertiary);
+          > code {
+            padding: 12px !important;
+          }
+        }
+      }
+    }
+
     &-delete {
       &-content {
         text-align: center;

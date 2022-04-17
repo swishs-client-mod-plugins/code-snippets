@@ -9,10 +9,10 @@ import * as monaco from 'monaco-editor';
 
 const registerSettingsView = async () => {
   const { FluxDispatcher } = Webpack.getByProps('dirtyDispatch');
-  const SettingsSections = (await import('@components/SettingsSections')).default;
+  const SettingsPanel = (await import('@components/SettingsPanel')).default;
 
   const registerTab = () =>
-    Patcher.addPatch(window.KernelSettings.register('Snippets', () => <SettingsSections />));
+    Patcher.addPatch(window.KernelSettings.register('Snippets', () => <SettingsPanel />));
 
   if (window.KernelSettings)
     return registerTab();

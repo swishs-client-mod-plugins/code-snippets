@@ -6,8 +6,8 @@ import Webpack, { Filters } from '@modules/Webpack';
 import { cjoin, extensions } from '@modules/Utilities';
 
 import SnippetIcon from '@components/icons/Icon';
-import InputModal from '@components/modals/InputModal';
-import DeleteModal from '@components/modals/DeleteModal';
+import UserInput from '@components/modals/UserInput';
+import DeleteConfirm from '@components/modals/DeleteConfirm';
 import ForEachOptimized from '@components/utility/ForEachOptimized';
 
 const join = cjoin('sidebar');
@@ -85,7 +85,7 @@ export default ({ states }: { states: States; }): JSX.Element => {
             className={button}
             onClick={() => {
               ModalActions.openModal((event: ModalEvent) => {
-                return <InputModal event={event} action={(input: string) => {
+                return <UserInput event={event} action={(input: string) => {
                   const [name, extension] = input.split('.');
                   Manager.createSnippet(name, extension);
                   setCurrentSnippet(name);
@@ -209,7 +209,7 @@ const TabItemContextMenu = ({ event, snippet, state, forceUpdate }: TabItemConte
         label='Rename Snippet'
         action={() => {
           ModalActions.openModal((event: ModalEvent) => {
-            return <InputModal event={event} action={(input: string) => {
+            return <UserInput event={event} action={(input: string) => {
               console.log(input, 'inpust');
               const [name, extension] = input.split('.');
 
@@ -243,7 +243,7 @@ const TabItemContextMenu = ({ event, snippet, state, forceUpdate }: TabItemConte
         label='Delete Snippet'
         action={() => {
           ModalActions.openModal((event: ModalEvent) => {
-            return <DeleteModal event={event} action={() => {
+            return <DeleteConfirm event={event} action={() => {
               Manager.deleteSnippet(snippet);
               if (snippet === currentSnippet)
                 return setCurrentSnippet(lastSnippet);

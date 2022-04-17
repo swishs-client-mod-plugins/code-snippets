@@ -2,9 +2,9 @@
 
 import Webpack, { Filters } from '@modules/Webpack';
 
-interface InputModalProps {
-  action: Function,
-  event: ModalEvent,
+interface UserInputProps {
+  action: Function;
+  event: ModalEvent;
   options?: {
     titleText?: string;
     headerText?: string;
@@ -29,7 +29,7 @@ const [
 
 const { Modal } = Webpack.components;
 
-export default ({ event, action, options }: InputModalProps): JSX.Element => {
+export default ({ event, action, options }: UserInputProps): JSX.Element => {
   const [input, _setInput] = React.useState(options?.initialInput || '');
   const [rejectMessage, setRejectMessage] = React.useState<string>(undefined);
 

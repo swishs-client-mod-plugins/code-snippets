@@ -7,8 +7,8 @@ import { cjoin, join, sleep } from '@modules/Utilities';
 
 import SaveIcon from '@components/icons/Save';
 import CleanIcon from '@components/icons/Clean';
-import InputModal from '@components/modals/InputModal';
-import DeleteModal from '@components/modals/DeleteModal';
+import UserInput from '@components/modals/UserInput';
+import DeleteConfirm from '@components/modals/DeleteConfirm';
 
 const pjoin = cjoin('topbar');
 
@@ -70,6 +70,21 @@ export default ({ states }: { states: States; }) => {
             <CleanIcon />
           </div>
         </Tooltip> : null}
+      {!Boolean(scriptType) ||
+        <div className={pjoin('switch')}>
+          <Switch
+            checked={snippet.enabled} className={pjoin('switch')}
+            onChange={(value) => {
+              const didError = Manager.updateSnippet(currentSnippet, { enabled: value });
+
+              if (didError) return;
+
+              if (!value) return Manager.cleanups[currentSnippet]?.();
+              Manager.runSnippet(currentSnippet, Manager.ScriptType.CSS, true);
+              Manager.makeToast(`Successfully saved and loaded snippet ${currentSnippet}!`, true);
+            }}
+          />
+        </div>}
       {snippet.gist ? <Tooltip position='top' text='Pull snippet from Github'>
         <div
           className={button}
@@ -91,7 +106,7 @@ export default ({ states }: { states: States; }) => {
           onClick={async () => {
             const id = await new Promise(resolve => {
               ModalActions.openModal((event: ModalEvent) => {
-                return <InputModal event={event} action={resolve} options={{
+                return <UserInput event={event} action={resolve} options={{
                   buttonText: 'Save ID',
                   titleText: 'Github Gist ID',
                   headerText: 'Enter the ID of the gist you want to pull from',
@@ -107,7 +122,7 @@ export default ({ states }: { states: States; }) => {
             await sleep(4);
 
             ModalActions.openModal((event: ModalEvent) => {
-              return <InputModal event={event} action={(name: string) => {
+              return <UserInput event={event} action={(name: string) => {
                 Manager.updateSnippet(currentSnippet, { gist: { id, name } });
               }} options={{
                 buttonText: 'Save Name',
@@ -120,21 +135,6 @@ export default ({ states }: { states: States; }) => {
           <Icon.Link height='20' width='20' />
         </div>
       </Tooltip>}
-      {!Boolean(scriptType) ||
-        <div className={pjoin('switch')}>
-          <Switch
-            checked={snippet.enabled} className={pjoin('switch')}
-            onChange={(value) => {
-              const didError = Manager.updateSnippet(currentSnippet, { enabled: value });
-
-              if (didError) return;
-
-              if (!value) return Manager.cleanups[currentSnippet]?.();
-              Manager.runSnippet(currentSnippet, Manager.ScriptType.CSS, true);
-              Manager.makeToast(`Successfully saved and loaded snippet ${currentSnippet}!`, true);
-            }}
-          />
-        </div>}
       {Boolean(scriptType) ||
         <Tooltip position='top' text={`${!snippet.enabled ? 'Turn on' : 'Turn off'} Run on Startup`}>
           <div className={`${button} ${!snippet.enabled ? join(disabled, pjoin('rocket')) : ''}`}
@@ -146,7 +146,7 @@ export default ({ states }: { states: States; }) => {
         className={join(button, dangerous)}
         onClick={() => {
           ModalActions.openModal((event: ModalEvent) => {
-            return <DeleteModal event={event} action={() => {
+            return <DeleteConfirm event={event} action={() => {
               Manager.deleteSnippet(currentSnippet);
               setCurrentSnippet(lastSnippet);
             }} />;

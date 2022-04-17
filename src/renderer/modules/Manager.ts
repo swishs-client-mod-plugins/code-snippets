@@ -174,10 +174,10 @@ const runCode = async (name: string, snippet: Snippet, silent?: boolean) => {
   let returnValue: Function | undefined;
   try {
     returnValue = await new Function(`
-        let Logger  = this.cs.logger;
-        let Patcher = this.cs.patcher;
-        let Webpack = this.cs.webpack;
-        let Manager = this.cs.manager;
+        let Logger  = window.cs.logger;
+        let Patcher = window.cs.patcher;
+        let Webpack = window.cs.webpack;
+        let Manager = window.cs.manager;
 
         return (async () => { ${CodeSnippetsNative.compile(snippet.code, snippet.extension)} })();
       `)();

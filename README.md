@@ -8,8 +8,9 @@ This is an *ALPHA* package, expect bugs; but also please mention me when you fin
 
 ## Installation:
 ```bash
-# I would advise against doing "pnpm i" as that will install way more stuff than you need.
-pnpm init
+# I would advise against doing the regular "npm i" as that will install way more stuff than you need.
+npm i --production
+pnpm i --production
 ```
 
 ## Swish's epic super happy fun todo list:
@@ -17,7 +18,6 @@ pnpm init
 General Functionality:
 - [x] Custom CSS and SCSS snippets
 - [x] Custom JS, TS, and JSX snippets
-- [ ] SASS syntax support
 - [ ] Help Modal (with backup snippets button)
 
 Bug Fixes:

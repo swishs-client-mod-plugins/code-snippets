@@ -10,14 +10,14 @@ const [Text, Button] = Webpack.bulk(
   Filters.byProps('DropdownSizes'),
 );
 
-interface DeleteModalProps {
+interface DeleteConfirmProps {
   event: ModalEvent;
   action: Function;
 }
 
 const join = cjoin('modal-delete');
 
-export default ({ event, action }: DeleteModalProps) => {
+export default ({ event, action }: DeleteConfirmProps) => {
   return (
     <Modal.Root size={Modal.Sizes.SMALL} transitionState={event.transitionState}>
       <Modal.Content className={join('content')}>

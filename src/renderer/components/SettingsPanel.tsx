@@ -9,16 +9,21 @@ import { pjoin } from '@modules/Utilities';
 import Editor from '@components/sections/Editor';
 import TopBar from '@components/sections/TopBar';
 import SideBar from '@components/sections/SideBar';
+import InfoModal from '@components/modals/Information';
 
 const [
   FormTitle,
   FormSection,
+  ModalActions,
   StickerPicker,
 ] = Webpack.bulk(
   Filters.byDisplayName('FormTitle'),
   Filters.byDisplayName('FormSection'),
+  Filters.byProps('closeModal'),
   Filters.byDisplayName('StickerPickerLoader', true),
 );
+
+const { Tooltip, Icon } = Webpack.components;
 
 export default () => {
   const editorRef = React.useRef<any>();
@@ -62,9 +67,12 @@ export default () => {
 
   return (
     <FormSection>
-      <FormTitle tag='h1'>
-        Code Snippets
-      </FormTitle>
+      <FormTitle className={pjoin(['header', 'title'])} tag='h1'>Code Snippets</FormTitle>
+      <Tooltip className={pjoin(['header', 'icon', 'tooltip'])} text='Information Modal' position='top'>
+        <div className={pjoin(['header', 'icon'])} onClick={() => ModalActions.openModal((event) => <InfoModal event={event} />)}>
+          <Icon.Info height='16' width='16' />
+        </div>
+      </Tooltip>
       <div className={pjoin('container')}>
         <SideBar states={states} />
         <div className={pjoin(['editor', 'container'])}>
