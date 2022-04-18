@@ -1,10 +1,12 @@
 /* The below code is licensed under MIT. */
 
 $background: var(--background-secondary-alt);
-$expanded-width: 510px;
-$collapsed-width: 632px;
-$expanded-sidebar: 175px;
+
+$expanded-sidebar: 14vw;
 $collapsed-sidebar: 53px;
+
+$expanded-editor: 42vw;
+$collapsed-editor: calc(42vw + (14vw - 3.5vw));
 
 .code-snippets {
   &-editor {
@@ -14,11 +16,11 @@ $collapsed-sidebar: 53px;
     }
 
     &-collapsed {
-      width: $collapsed-width;
+      width: $collapsed-editor;
     }
 
     &-expanded {
-      width: $expanded-width;
+      width: $expanded-editor;
     }
   }
 
@@ -240,11 +242,11 @@ $collapsed-sidebar: 53px;
     }
 
     &-collapsed {
-      width: $collapsed-width;
+      width: $collapsed-editor;
     }
 
     &-expanded {
-      width: $expanded-width;
+      width: $expanded-editor;
     }
 
     &-switch {

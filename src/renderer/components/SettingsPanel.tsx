@@ -16,11 +16,13 @@ const [
   FormSection,
   ModalActions,
   StickerPicker,
+  { keybind: keybindClass },
 ] = Webpack.bulk(
   Filters.byDisplayName('FormTitle'),
   Filters.byDisplayName('FormSection'),
   Filters.byProps('closeModal'),
   Filters.byDisplayName('StickerPickerLoader', true),
+  Filters.byProps('closeButtonBold'),
 );
 
 const { Tooltip, Icon } = Webpack.components;
@@ -43,6 +45,15 @@ export default () => {
     currentSnippetState[1](value);
     unsavedState[1](false);
   };
+
+  // Hide "ESC" text so the editor doesn't overlap it.
+  React.useEffect(() => {
+    const node = Manager.injectCSS(`
+      .${keybindClass} { opacity: 0; }
+    `, 'keybind-hide');
+
+    return () => node.remove();
+  });
 
   // Patch dogshit sticker keybind working even in SettingsView.
   React.useEffect(() => {

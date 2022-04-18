@@ -24,6 +24,11 @@ const registerSettingsView = async () => {
 };
 
 const injectCSS = (Manager: typeof import('@modules/Manager').default) => {
+  const { keybind } = Webpack.getByProps('closeButtonBold');
+  const keybindPatch = Manager.injectCSS(`
+    .${keybind} { transition: opacity 0.2s; }
+  `, 'keybind-patch');
+
   const style = CodeSnippetsNative.readFile('dist/renderer.css');
 
   if (!style) return Logger.warn('Could not find styles file.');
@@ -47,6 +52,7 @@ const injectCSS = (Manager: typeof import('@modules/Manager').default) => {
   `, 'codicon');
 
   return () => {
+    keybindPatch.remove();
     codiconStyles.remove();
     internalStyles.remove();
   };
