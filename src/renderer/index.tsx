@@ -107,7 +107,7 @@ export default {
       patcher: Patcher,
       webpack: Webpack,
       manager: Manager,
-      verison: JSON.parse(CodeSnippetsNative.readFile('package.json')).version,
+      version: '0.1.1',
     };
 
     await registerSettingsView();

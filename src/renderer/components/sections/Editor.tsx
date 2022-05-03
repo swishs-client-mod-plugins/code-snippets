@@ -25,8 +25,9 @@ const rgbToHex = (colors: number[]): string =>
     .slice(1)}`;
 
 const extractRGB = (value: string): number[] =>
-  value.match(/rgba?\(((?:[1-9]*,? ?){2}[1-9]*)/)?.[1]
-    .split(',')
+  value
+    .match(/rgba?\((\d{1,3}),? ?(\d{1,3}),? ?(\d{1,3})\)/)
+    ?.slice(1, 4)
     .map(Number);
 
 const convertToHex = (value: string) =>
@@ -49,6 +50,8 @@ const createEditorTheme = () => {
     bgFloating: getValue('--background-floating'),
     bgTeritary: getValue('--background-tertiary'),
   };
+
+  console.log(colors);
 
   const lightMode = SettingsStore.settings.appearance.theme - 1;
   monaco.editor.defineTheme('code-snippets', {
