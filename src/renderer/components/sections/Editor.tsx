@@ -51,8 +51,6 @@ const createEditorTheme = () => {
     bgTeritary: getValue('--background-tertiary'),
   };
 
-  console.log(colors);
-
   const lightMode = SettingsStore.settings.appearance.theme - 1;
   monaco.editor.defineTheme('code-snippets', {
     inherit: true,

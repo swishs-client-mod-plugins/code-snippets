@@ -6,7 +6,7 @@ import { cjoin } from '@modules/Utilities';
 
 const { Modal } = Webpack.components;
 const [Text, Button] = Webpack.bulk(
-  Filters.byDisplayName('Text'),
+  Filters.byDisplayName('LegacyText'),
   Filters.byProps('DropdownSizes'),
 );
 
