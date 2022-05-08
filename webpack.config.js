@@ -10,6 +10,7 @@ module.exports = ({ minify = false }) => {
   /**@type {import('webpack').Configuration} */
   return {
     mode: !!minify ? 'production' : 'development',
+    devtool: 'eval-source-map',
     experiments: { outputModule: true },
     plugins: [new ExtractPlugin(), new CleanWebpackPlugin()],
     entry: {
