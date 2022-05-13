@@ -11,34 +11,24 @@ const join = cjoin('editor');
 
 const SettingsStore = Webpack.getByProps('getFullState', 'settings');
 
-// https://1loc.dev/misc/convert-3-digits-color-to-6-digits-color/
-const toFullHexColor = (color: string): string =>
-  `#${(color.startsWith('#') ? color.slice(1) : color)
-    .split('')
-    .map((c) => `${c}${c}`)
-    .join('')}`;
+type RGBA = [number, number, number, number?];
 
 // https://1loc.dev/misc/convert-rgb-color-to-hex/
-const rgbToHex = (colors: number[]): string =>
-  `#${((1 << 24) + (colors[0] << 16) + (colors[1] << 8) + colors[2])
-    .toString(16)
-    .slice(1)}`;
+const rgbToHex = ([red, green, blue, alpha]: RGBA): string =>
+  `#${[red, green, blue, alpha]
+    .map((v) =>
+      v?.toString(16).padStart(2, '0'))
+    .join('')
+  }`;
 
-const extractRGB = (value: string): number[] =>
-  value
-    .match(/rgba?\((\d{1,3}),? ?(\d{1,3}),? ?(\d{1,3})\)/)
-    ?.slice(1, 4)
-    .map(Number);
-
-const convertToHex = (value: string) =>
-  !value.indexOf('rgb')
-    ? rgbToHex(extractRGB(value))
-    : value.length === 4
-      ? toFullHexColor(value)
-      : value.substring(0, 7);
+const parseColor = (str: string): RGBA => {
+  const sheet = new CSSStyleSheet() as any;
+  sheet.replaceSync(`target {color: ${str}}`);
+  return sheet.cssRules[0].style.color.match(/[\.\d]+/g).map(Number);
+};
 
 const getValue = (value: string): string =>
-  convertToHex(body.getPropertyValue(value).trim());
+  rgbToHex(parseColor(body.getPropertyValue(value).trim()));
 
 let body: CSSStyleDeclaration;
 const createEditorTheme = () => {
