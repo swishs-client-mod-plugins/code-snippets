@@ -1,2 +1,4 @@
 node_modules
 src/snippets.json
+src/backup*.json
+pnpm-lock.yaml
