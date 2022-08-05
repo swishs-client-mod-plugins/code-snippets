@@ -8,7 +8,7 @@ import Webpack from '@modules/Webpack';
 import * as monaco from 'monaco-editor';
 
 const registerSettingsView = async () => {
-  const { FluxDispatcher } = Webpack.getByProps('dirtyDispatch');
+  const { FluxDispatcher } = Webpack.getByProps('dispatch', 'subscribe');
   const SettingsPanel = (await import('@components/SettingsPanel')).default;
 
   const registerTab = () =>
